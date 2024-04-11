@@ -1,52 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import Navbar from "./Navbar";
+import { useAppContext } from "./AppContext";
 
-function App() {
-  const [recipeData, setRecipeData] = useState([{}]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [randomIndex, setRandomIndex] = useState();
-
-  function handleSearch() {
-    // prevents default form submission behaviour
-    console.log(searchQuery);
-    fetch("/search", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ query: searchQuery }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setRecipeData(data);
-        console.log(data);
-        {
-          data.number > data.totalResults
-            ? setRandomIndex(Math.floor(Math.random() * data.totalResults))
-            : setRandomIndex(Math.floor(Math.random() * data.number));
-        }
-      });
-  }
+const App = () => {
+  const { recipeData, randomIndex } = useAppContext();
 
   return (
     <div>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          handleSearch();
-        }}
-      >
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(event) => {
-            event.preventDefault();
-            setSearchQuery(event.target.value);
-          }}
-          placeholder="Enter the type of food you want a recipe for..."
-        />
-        <button type="submit">Search</button>
-      </form>
-      {typeof recipeData.number === "undefined" ? (
+      <Navbar />
+      {typeof recipeData.totalResults === "undefined" ||
+      recipeData.totalResults === 0 ? (
         <p>No recipe yet...</p>
       ) : (
         <div>
@@ -56,6 +19,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;
