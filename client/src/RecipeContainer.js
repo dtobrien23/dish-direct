@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAppContext } from "./AppContext";
 
 const RecipeContainer = () => {
-  const { recipeData } = useAppContext();
+  const { recipeData, numOfRecipes } = useAppContext();
+  const [recipesToShow, setRecipesToShow] = useState(30);
+
+  const handleLoadMore = () => {
+    setRecipesToShow(recipesToShow + 30);
+  };
 
   return (
-    <div>
-      {recipeData.results.map((recipe) => (
+    <div style={{ margin: "40px 200px" }}>
+      <p>
+        Showing 1 to{" "}
+        {recipesToShow < numOfRecipes ? recipesToShow : numOfRecipes} of{" "}
+        {numOfRecipes} results
+      </p>
+      {recipeData.results.slice(0, recipesToShow).map((recipe) => (
         <div
           key={recipe.id}
           style={{
             border: "1px solid black",
-            margin: "40px 200px",
+            margin: "20px 0px",
             padding: "20px",
             backgroundColor: "white",
           }}
@@ -39,6 +49,9 @@ const RecipeContainer = () => {
           </div>
         </div>
       ))}
+      {recipeData.results.length > recipesToShow && (
+        <button onClick={handleLoadMore}>Load More</button>
+      )}
     </div>
   );
 };

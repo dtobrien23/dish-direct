@@ -6,8 +6,8 @@ export const useAppContext = () => useContext(AppContext);
 
 export const AppProvider = ({ children }) => {
   const [recipeData, setRecipeData] = useState([{}]);
+  const [numOfRecipes, setNumOfRecipes] = useState();
   const [searchQuery, setSearchQuery] = useState("");
-  const [randomIndex, setRandomIndex] = useState();
 
   const handleSearch = () => {
     console.log(searchQuery);
@@ -24,8 +24,8 @@ export const AppProvider = ({ children }) => {
         console.log(data);
         {
           data.number > data.totalResults
-            ? setRandomIndex(Math.floor(Math.random() * data.totalResults))
-            : setRandomIndex(Math.floor(Math.random() * data.number));
+            ? setNumOfRecipes(data.totalResults)
+            : setNumOfRecipes(data.number);
         }
       });
   };
@@ -35,10 +35,9 @@ export const AppProvider = ({ children }) => {
       value={{
         recipeData,
         setRecipeData,
+        numOfRecipes,
         searchQuery,
         setSearchQuery,
-        randomIndex,
-        setRandomIndex,
         handleSearch,
       }}
     >
