@@ -8,7 +8,7 @@ const Navbar = () => {
     <div
       style={{
         height: "100px",
-        backgroundColor: "#F5F5F5",
+        backgroundColor: "white",
         borderBottom: "1px solid black",
       }}
     >

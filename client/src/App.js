@@ -1,9 +1,11 @@
 import React from "react";
 import Navbar from "./Navbar";
+import RecipeContainer from "./RecipeContainer";
 import { useAppContext } from "./AppContext";
+import "./App.css";
 
 const App = () => {
-  const { recipeData, randomIndex } = useAppContext();
+  const { recipeData } = useAppContext();
 
   return (
     <div>
@@ -12,16 +14,7 @@ const App = () => {
       recipeData.totalResults === 0 ? (
         <p>No recipe yet...</p>
       ) : (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <h1>{recipeData.results[randomIndex].title}</h1>
-          <img src={recipeData.results[randomIndex].image} alt="Lovely food" />
-        </div>
+        <RecipeContainer />
       )}
     </div>
   );
