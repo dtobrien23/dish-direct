@@ -8,6 +8,7 @@ export const AppProvider = ({ children }) => {
   const [recipeData, setRecipeData] = useState([{}]);
   const [numOfRecipes, setNumOfRecipes] = useState();
   const [searchQuery, setSearchQuery] = useState("");
+  const [recipesToShow, setRecipesToShow] = useState(30);
 
   const handleSearch = () => {
     console.log(searchQuery);
@@ -27,6 +28,7 @@ export const AppProvider = ({ children }) => {
             ? setNumOfRecipes(data.totalResults)
             : setNumOfRecipes(data.number);
         }
+        setRecipesToShow(30); // to reset after each new search
       });
   };
 
@@ -39,6 +41,8 @@ export const AppProvider = ({ children }) => {
         searchQuery,
         setSearchQuery,
         handleSearch,
+        recipesToShow,
+        setRecipesToShow,
       }}
     >
       {children}

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useAppContext } from "./AppContext";
 
 const RecipeContainer = () => {
-  const { recipeData, numOfRecipes } = useAppContext();
-  const [recipesToShow, setRecipesToShow] = useState(30);
+  const { recipeData, numOfRecipes, recipesToShow, setRecipesToShow } =
+    useAppContext();
 
   const handleLoadMore = () => {
     setRecipesToShow(recipesToShow + 30);
