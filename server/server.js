@@ -18,7 +18,9 @@ app.post("/search", jsonParser, async (req, res) => {
       params: {
         apiKey: spoonApiKey,
         query: searchQuery,
-        maxFat: 25,
+        addRecipeInformation: true,
+        addRecipeInstructions: true,
+        addRecipeNutrition: true,
         number: 100,
       },
     });

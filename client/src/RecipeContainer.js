@@ -12,11 +12,31 @@ const RecipeContainer = () => {
           style={{
             border: "1px solid black",
             margin: "40px 200px",
+            padding: "20px",
             backgroundColor: "white",
           }}
         >
-          <h1>{recipe.title}</h1>
-          <img src={recipe.image} alt="Lovely food" />
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <img
+              src={recipe.image}
+              alt="Lovely food"
+              style={{ height: "120px" }}
+            />
+            <div style={{ margin: "10px 0px 0px 20px" }}>
+              <h1 style={{ margin: 0 }}>{recipe.title}</h1>
+              <p>
+                {recipe.aggregateLikes === 1 ? (
+                  <span>{recipe.aggregateLikes} like</span>
+                ) : (
+                  <span>{recipe.aggregateLikes} likes</span>
+                )}
+                <span>{recipe.readyInMinutes} minutes</span>
+                {recipe.vegan === true && <span>Vegan</span>}
+                {recipe.vegetarian === true && <span>Vegetarian</span>}
+                {recipe.glutenFree === true && <span>Gluten-Free</span>}
+              </p>
+            </div>
+          </div>
         </div>
       ))}
     </div>
