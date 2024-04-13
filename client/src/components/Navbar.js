@@ -1,7 +1,9 @@
 import React from "react";
-import { useAppContext } from "./AppContext";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppContext } from "../AppContext";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { searchQuery, setSearchQuery, handleSearch } = useAppContext();
 
   return (
@@ -21,20 +23,23 @@ const Navbar = () => {
           justifyContent: "space-between",
         }}
       >
-        <h1
-          style={{
-            fontFamily: "Libre Bodoni",
-            fontSize: "40px",
-            color: "#940000",
-          }}
-        >
-          dishDirect
-        </h1>
-
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <h1
+            style={{
+              fontFamily: "Libre Bodoni",
+              fontSize: "40px",
+              color: "#940000",
+              cursor: "pointer",
+            }}
+          >
+            dishDirect
+          </h1>
+        </Link>
         <form
           onSubmit={(event) => {
             event.preventDefault();
             handleSearch();
+            navigate("/recipes");
           }}
           style={{
             display: "flex",
@@ -60,6 +65,7 @@ const Navbar = () => {
               boxSizing: "border-box",
             }}
           />
+          {/* <Link to="/recipes" style={{ textDecoration: "none" }}> */}
           <button
             type="submit"
             style={{
@@ -72,6 +78,7 @@ const Navbar = () => {
           >
             Search
           </button>
+          {/* </Link> */}
         </form>
       </div>
     </div>

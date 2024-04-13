@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAppContext } from "./AppContext";
+import { useAppContext } from "../AppContext";
 
 const RecipeContainer = () => {
   const { recipeData, numOfRecipes, recipesToShow, setRecipesToShow } =

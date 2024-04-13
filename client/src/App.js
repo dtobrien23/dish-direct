@@ -1,22 +1,19 @@
 import React from "react";
-import Navbar from "./Navbar";
-import RecipeContainer from "./RecipeContainer";
-import { useAppContext } from "./AppContext";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import RecipeList from "./pages/RecipeList";
 import "./App.css";
 
 const App = () => {
-  const { recipeData } = useAppContext();
-
   return (
-    <div>
-      <Navbar />
-      {typeof recipeData.totalResults === "undefined" ||
-      recipeData.totalResults === 0 ? (
-        <p>No recipe yet...</p>
-      ) : (
-        <RecipeContainer />
-      )}
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/recipes" element={<RecipeList />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
