@@ -16,7 +16,7 @@ const Navbar = () => {
     >
       <div
         style={{
-          margin: "0px 200px 0px 200px",
+          margin: "0px 200px",
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
@@ -66,7 +66,6 @@ const Navbar = () => {
               boxSizing: "border-box",
             }}
           />
-          {/* <Link to="/recipes" style={{ textDecoration: "none" }}> */}
           <button
             type="submit"
             style={{
@@ -79,7 +78,6 @@ const Navbar = () => {
           >
             Search
           </button>
-          {/* </Link> */}
         </form>
       </div>
     </div>

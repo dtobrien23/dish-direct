@@ -5,3 +5,8 @@ body {
 span {
   margin-right: 50px;
 }
+
+h2 {
+  margin: 15px 0;
+  font-size: x-large;
+}

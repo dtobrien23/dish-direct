@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../AppContext";
-import "../App.css";
 
 const Home = () => {
   const { setSearchQuery, handleSearch } = useAppContext();
@@ -18,15 +17,34 @@ const Home = () => {
   ];
 
   const cuisines = [
-    "Italian",
-    "Mexican",
+    "African",
+    "Asian",
+    "American",
+    "British",
+    "Cajun",
+    "Caribbean",
     "Chinese",
+    "Eastern European",
+    "European",
+    "French",
+    "German",
+    "Greek",
+    "Indian",
+    "Irish",
+    "Italian",
+    "Japanese",
+    "Jewish",
+    "Korean",
+    "Latin American",
+    "Mediterranean",
+    "Mexican",
+    "Middle Eastern",
+    "Nordic",
+    "Southern",
+    "Spanish",
     "Thai",
     "Vietnamese",
-    "American",
   ];
-
-  const ingredients = ["Pasta", "Rice", "Potatoes", "Chicken", "Beef"];
 
   const diets = [
     "Vegetarian",
@@ -38,16 +56,28 @@ const Home = () => {
     "Whole30",
   ];
 
+  const ingredients = [
+    "Pasta",
+    "Rice",
+    "Potatoes",
+    "Eggs",
+    "Fish",
+    "Chicken",
+    "Beef",
+  ];
+
   return (
-    <div>
+    <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar />
       <div
         id="homepage-container"
         style={{
+          flex: "1", // to fill up remaining vertical space beneath navbar
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          margin: "80px 200px",
+          alignItems: "center",
+          margin: "0px 200px",
         }}
       >
         <div
@@ -58,7 +88,7 @@ const Home = () => {
           }}
         >
           <div id="options-list-1" style={{ marginRight: "125px" }}>
-            <h1>Meal Types</h1>
+            <h2>Meal Types</h2>
             {mealTypes.map((type) => (
               <>
                 <Link
@@ -67,45 +97,14 @@ const Home = () => {
                     setSearchQuery(type);
                     handleSearch(type, "type");
                   }}
+                  style={{ textDecoration: "none", color: "black" }}
                 >
                   {type}
                 </Link>
                 <br />
               </>
             ))}
-            <h1>Cuisines</h1>
-            {cuisines.map((cuisine) => (
-              <>
-                <Link
-                  to="/recipes"
-                  onClick={() => {
-                    setSearchQuery(cuisine);
-                    handleSearch(cuisine, "cuisine");
-                  }}
-                >
-                  {cuisine}
-                </Link>
-                <br />
-              </>
-            ))}
-          </div>
-          <div id="options-list-2">
-            <h1>Ingredients</h1>
-            {ingredients.map((ingredient) => (
-              <>
-                <Link
-                  to="/recipes"
-                  onClick={() => {
-                    setSearchQuery(ingredient);
-                    handleSearch([ingredient], "includeIngredients");
-                  }}
-                >
-                  {ingredient}
-                </Link>
-                <br />
-              </>
-            ))}
-            <h1>Diets</h1>
+            <h2>Diets</h2>
             {diets.map((diet) => (
               <>
                 <Link
@@ -114,8 +113,43 @@ const Home = () => {
                     setSearchQuery(diet);
                     handleSearch([diet], "diet");
                   }}
+                  style={{ textDecoration: "none", color: "black" }}
                 >
                   {diet}
+                </Link>
+                <br />
+              </>
+            ))}
+            <h2>Includes</h2>
+            {ingredients.map((ingredient) => (
+              <>
+                <Link
+                  to="/recipes"
+                  onClick={() => {
+                    setSearchQuery(ingredient);
+                    handleSearch([ingredient], "includeIngredients");
+                  }}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  {ingredient}
+                </Link>
+                <br />
+              </>
+            ))}
+          </div>
+          <div id="options-list-2">
+            <h2>Cuisines</h2>
+            {cuisines.map((cuisine) => (
+              <>
+                <Link
+                  to="/recipes"
+                  onClick={() => {
+                    setSearchQuery(cuisine);
+                    handleSearch(cuisine, "cuisine");
+                  }}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  {cuisine}
                 </Link>
                 <br />
               </>
