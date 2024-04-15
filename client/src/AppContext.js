@@ -10,14 +10,14 @@ export const AppProvider = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [recipesToShow, setRecipesToShow] = useState(30);
 
-  const handleSearch = () => {
-    console.log(searchQuery);
+  // searchQuery as a parameter to bypass asynchronous state variable updates
+  const handleSearch = (searchQuery, param = "query") => {
     fetch("/search", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ query: searchQuery }),
+      body: JSON.stringify({ [param]: searchQuery }),
     })
       .then((response) => response.json())
       .then((data) => {

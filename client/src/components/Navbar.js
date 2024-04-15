@@ -38,7 +38,7 @@ const Navbar = () => {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            handleSearch();
+            handleSearch(searchQuery);
             navigate("/recipes");
           }}
           style={{
@@ -58,6 +58,7 @@ const Navbar = () => {
             placeholder="Ingredient, dish, keyword..."
             style={{
               height: "100%",
+              width: "300px",
               outline: "none",
               padding: "0 10px 0 10px",
               border: "none",

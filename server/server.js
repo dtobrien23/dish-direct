@@ -11,13 +11,13 @@ const jsonParser = bodyParser.json();
 
 app.post("/search", jsonParser, async (req, res) => {
   try {
-    const searchQuery = req.body.query;
-    console.log("hellooooo", searchQuery);
+    const [queryType, searchQuery] = Object.entries(req.body)[0];
+
     // Make a request to the Spoonacular API using Axios
     const response = await axios.get(spoonURL, {
       params: {
         apiKey: spoonApiKey,
-        query: searchQuery,
+        [queryType]: searchQuery,
         addRecipeInformation: true,
         addRecipeInstructions: true,
         addRecipeNutrition: true,
@@ -27,7 +27,6 @@ app.post("/search", jsonParser, async (req, res) => {
     const data = response.data;
 
     // Send the response back to the client
-    console.log(data);
     res.json(data);
   } catch (error) {
     console.error("Error fetching recipes:", error);
