@@ -16,18 +16,20 @@ const RecipeContainer = () => {
   };
 
   return (
-    <div style={{ margin: "40px 200px" }}>
+    <div style={{ margin: "40px 200px 80px 200px" }}>
       <p>
         Showing 1 to{" "}
         {recipesToShow < numOfRecipes ? recipesToShow : numOfRecipes} of{" "}
         {numOfRecipes} results
       </p>
-      {recipeData.results.slice(0, recipesToShow).map((recipe) => (
+      {recipeData.results.slice(0, recipesToShow).map((recipe, index) => (
         <div
           key={recipe.id}
           style={{
-            border: "1px solid black",
-            margin: "20px 0px",
+            borderBottom:
+              index !== recipeData.results.length - 1
+                ? "1px solid black"
+                : "none",
             padding: "20px",
             backgroundColor: "white",
           }}

@@ -21,6 +21,7 @@ app.post("/search", jsonParser, async (req, res) => {
         addRecipeInformation: true,
         addRecipeInstructions: true,
         addRecipeNutrition: true,
+        fillIngredients: true,
         number: 100,
       },
     });

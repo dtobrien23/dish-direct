@@ -64,9 +64,9 @@ const Home = () => {
   ];
 
   return (
-    <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="page-container">
       <Navbar />
-      <div id="home-page-container">
+      <div id="homepage-content-container">
         <div id="options-list-container">
           <div id="options-list-1" style={{ marginRight: "125px" }}>
             <h2>Meal Types</h2>
