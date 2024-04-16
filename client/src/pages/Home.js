@@ -1,11 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import { Link } from "react-router-dom";
-import { useAppContext } from "../AppContext";
+import HomePageLink from "../components/HomePageLink";
 
 const Home = () => {
-  const { setSearchQuery, handleSearch } = useAppContext();
-
   const mealTypes = [
     "Breakfast",
     "Appetiser",
@@ -69,70 +66,30 @@ const Home = () => {
   return (
     <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar />
-      <div
-        id="homepage-container"
-        style={{
-          flex: "1", // to fill up remaining vertical space beneath navbar
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          margin: "0px 200px",
-        }}
-      >
-        <div
-          id="options-list-container"
-          style={{
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
+      <div id="home-page-container">
+        <div id="options-list-container">
           <div id="options-list-1" style={{ marginRight: "125px" }}>
             <h2>Meal Types</h2>
             {mealTypes.map((type) => (
               <>
-                <Link
-                  to="/recipes"
-                  onClick={() => {
-                    setSearchQuery(type);
-                    handleSearch(type, "type");
-                  }}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  {type}
-                </Link>
+                <HomePageLink searchTerm={type} queryType="type" />
                 <br />
               </>
             ))}
             <h2>Diets</h2>
             {diets.map((diet) => (
               <>
-                <Link
-                  to="/recipes"
-                  onClick={() => {
-                    setSearchQuery(diet);
-                    handleSearch([diet], "diet");
-                  }}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  {diet}
-                </Link>
+                <HomePageLink searchTerm={diet} queryType="diet" />
                 <br />
               </>
             ))}
             <h2>Includes</h2>
             {ingredients.map((ingredient) => (
               <>
-                <Link
-                  to="/recipes"
-                  onClick={() => {
-                    setSearchQuery(ingredient);
-                    handleSearch([ingredient], "includeIngredients");
-                  }}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  {ingredient}
-                </Link>
+                <HomePageLink
+                  searchTerm={ingredient} // unsure if ingredient needs to be in an array or not, seems to be working without array
+                  queryType="includeIngredients"
+                />
                 <br />
               </>
             ))}
@@ -141,16 +98,7 @@ const Home = () => {
             <h2>Cuisines</h2>
             {cuisines.map((cuisine) => (
               <>
-                <Link
-                  to="/recipes"
-                  onClick={() => {
-                    setSearchQuery(cuisine);
-                    handleSearch(cuisine, "cuisine");
-                  }}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  {cuisine}
-                </Link>
+                <HomePageLink searchTerm={cuisine} queryType="cuisine" />
                 <br />
               </>
             ))}

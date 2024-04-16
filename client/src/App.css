@@ -10,3 +10,23 @@ h2 {
   margin: 15px 0;
   font-size: x-large;
 }
+
+#home-page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px 200px;
+}
+
+#options-list-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.home-page-link {
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid transparent;
+}
