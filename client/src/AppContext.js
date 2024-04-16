@@ -1,7 +1,6 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 export const AppContext = createContext();
-
 export const useAppContext = () => useContext(AppContext);
 
 export const AppProvider = ({ children }) => {
@@ -9,7 +8,18 @@ export const AppProvider = ({ children }) => {
   const [numOfRecipes, setNumOfRecipes] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [recipesToShow, setRecipesToShow] = useState(30);
-  const [chosenRecipe, setChosenRecipe] = useState("");
+
+  const getInitialState = () => {
+    const chosenRecipe = sessionStorage.getItem("CHOSEN_RECIPE");
+    return chosenRecipe ? JSON.parse(chosenRecipe) : "";
+  };
+
+  const [chosenRecipe, setChosenRecipe] = useState(getInitialState);
+
+  // keeping state persistent until user goes back to Home page
+  useEffect(() => {
+    sessionStorage.setItem("CHOSEN_RECIPE", JSON.stringify(chosenRecipe));
+  }, [chosenRecipe]);
 
   // searchQuery as a parameter to bypass asynchronous state variable updates
   const handleSearch = (searchQuery, param = "query") => {

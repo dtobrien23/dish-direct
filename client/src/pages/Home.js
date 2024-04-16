@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import HomePageLink from "../components/HomePageLink";
+import { useAppContext } from "../AppContext";
 
 const Home = () => {
+  const { setChosenRecipe } = useAppContext();
+
+  const location = useLocation();
+
+  // reset states when going back to Home page
+  useEffect(() => {
+    setChosenRecipe("");
+  }, [location]);
+
+  // lists of options on Home page
   const mealTypes = [
     "Breakfast",
     "Appetiser",
