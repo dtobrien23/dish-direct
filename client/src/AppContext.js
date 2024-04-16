@@ -9,6 +9,7 @@ export const AppProvider = ({ children }) => {
   const [numOfRecipes, setNumOfRecipes] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [recipesToShow, setRecipesToShow] = useState(30);
+  const [chosenRecipe, setChosenRecipe] = useState("");
 
   // searchQuery as a parameter to bypass asynchronous state variable updates
   const handleSearch = (searchQuery, param = "query") => {
@@ -43,6 +44,8 @@ export const AppProvider = ({ children }) => {
         handleSearch,
         recipesToShow,
         setRecipesToShow,
+        chosenRecipe,
+        setChosenRecipe,
       }}
     >
       {children}

@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import { useAppContext } from "../AppContext";
 
 const RecipeContainer = () => {
-  const { recipeData, numOfRecipes, recipesToShow, setRecipesToShow } =
-    useAppContext();
+  const {
+    recipeData,
+    numOfRecipes,
+    recipesToShow,
+    setRecipesToShow,
+    setChosenRecipe,
+  } = useAppContext();
 
   const handleLoadMore = () => {
     setRecipesToShow(recipesToShow + 30);
@@ -27,13 +33,35 @@ const RecipeContainer = () => {
           }}
         >
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <img
-              src={recipe.image}
-              alt="Lovely food"
-              style={{ height: "120px" }}
-            />
+            <Link
+              to="/recipe-info"
+              onClick={() => {
+                setChosenRecipe(recipe);
+              }}
+              style={{ textDecoration: "none" }}
+            >
+              <img
+                src={recipe.image}
+                alt="Lovely food"
+                style={{ height: "120px" }}
+              />
+            </Link>
             <div style={{ margin: "10px 0px 0px 20px" }}>
-              <h1 style={{ margin: 0 }}>{recipe.title}</h1>
+              <Link
+                to="/recipe-info"
+                onClick={() => {
+                  setChosenRecipe(recipe);
+                }}
+                style={{ textDecoration: "none", color: "black" }}
+                onMouseEnter={(e) => {
+                  e.target.style.color = "#940000";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = "black";
+                }}
+              >
+                <h1 style={{ margin: 0 }}>{recipe.title}</h1>
+              </Link>
               <p>
                 {recipe.aggregateLikes === 1 ? (
                   <span>{recipe.aggregateLikes} like</span>
