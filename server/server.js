@@ -1,12 +1,12 @@
+require("dotenv").config({ path: "../.env" });
 const express = require("express");
 const axios = require("axios");
 const bodyParser = require("body-parser"); // needed to parse JSON data
-const app = express();
-
+const dbConfig = require("./dbConfig");
 const { OAuth2Client } = require("google-auth-library");
-const client = new OAuth2Client();
 
-require("dotenv").config({ path: "../.env" });
+const app = express();
+const client = new OAuth2Client();
 
 const spoonURL = "https://api.spoonacular.com/recipes/complexSearch";
 const spoonApiKey = process.env.SPOON_API_KEY;
