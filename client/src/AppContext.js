@@ -8,6 +8,7 @@ export const AppProvider = ({ children }) => {
   const [numOfRecipes, setNumOfRecipes] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [recipesToShow, setRecipesToShow] = useState(30);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const getInitialState = () => {
     const chosenRecipe = sessionStorage.getItem("CHOSEN_RECIPE");
@@ -56,6 +57,8 @@ export const AppProvider = ({ children }) => {
         setRecipesToShow,
         chosenRecipe,
         setChosenRecipe,
+        isLoggedIn,
+        setIsLoggedIn,
       }}
     >
       {children}

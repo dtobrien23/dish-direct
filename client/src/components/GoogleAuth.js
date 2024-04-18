@@ -1,7 +1,10 @@
 import React from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { useAppContext } from "../AppContext";
 
 const GoogleAuth = () => {
+  const { setIsLoggedIn } = useAppContext();
+
   const clientId = process.env.REACT_APP_CLIENT_ID;
 
   const handleLoginSuccess = async (response) => {
@@ -22,6 +25,8 @@ const GoogleAuth = () => {
       if (res.ok) {
         const data = await res.json();
         console.log("User authenticated:", data);
+        setIsLoggedIn(true);
+        console.log("loggedIn");
       } else {
         console.error("Authentication failed:", res.statusText);
       }

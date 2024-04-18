@@ -1,12 +1,43 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useAppContext } from "../AppContext";
 import GoogleAuth from "./GoogleAuth";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { searchQuery, setSearchQuery, handleSearch } = useAppContext();
+  const {
+    searchQuery,
+    setSearchQuery,
+    handleSearch,
+    isLoggedIn,
+    setIsLoggedIn,
+  } = useAppContext();
+  const [isDropdownOpen, setIsDropdownOpen] = useState();
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
+  // Effect to add event listener when component mounts
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -22,33 +53,30 @@ const Navbar = () => {
             color: "white",
           }}
         >
-          <GoogleAuth />
-          <button
-            style={{
-              border: "none",
-              backgroundColor: "#940000",
-              color: "white",
-              fontWeight: "bold",
-            }}
-          >
-            Sign In
-          </button>
-          |
-          <button
-            style={{
-              border: "none",
-              backgroundColor: "#940000",
-              color: "white",
-              fontWeight: "bold",
-            }}
-          >
-            Register
-          </button>
+          <div className="dropdown" ref={dropdownRef}>
+            {isLoggedIn ? (
+              <button className="dropbtn">Account</button>
+            ) : (
+              <button className="dropbtn" onClick={toggleDropdown}>
+                Log In
+              </button>
+            )}
+
+            {isDropdownOpen && (
+              <div className="dropdown-content">
+                {isLoggedIn ? (
+                  <button onClick={handleLogout}>Log Out</button>
+                ) : (
+                  <GoogleAuth />
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div
         style={{
-          height: "100px",
+          minHeight: "100px",
           width: "100%",
           backgroundColor: "white",
           borderBottom: "1px solid black",

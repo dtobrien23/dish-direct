@@ -7,7 +7,7 @@ import "../App.css";
 const RecipeList = () => {
   const { recipeData } = useAppContext();
   return (
-    <div>
+    <div className="page-container">
       <Navbar />
       {typeof recipeData.totalResults === "undefined" ||
       recipeData.totalResults === 0 ? (
