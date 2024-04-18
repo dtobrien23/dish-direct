@@ -54,13 +54,9 @@ const Navbar = () => {
           }}
         >
           <div className="dropdown" ref={dropdownRef}>
-            {isLoggedIn ? (
-              <button className="dropbtn">Account</button>
-            ) : (
-              <button className="dropbtn" onClick={toggleDropdown}>
-                Log In
-              </button>
-            )}
+            <button className="dropbtn" onClick={toggleDropdown}>
+              {isLoggedIn ? "Account" : "Log In"}
+            </button>
 
             {isDropdownOpen && (
               <div className="dropdown-content">
