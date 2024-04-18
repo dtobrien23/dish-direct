@@ -28,12 +28,15 @@ export const AppProvider = ({ children }) => {
   //////////////////////////////////
   const getInitialChosenRecipeState = () => {
     const chosenRecipe = sessionStorage.getItem("CHOSEN_RECIPE");
-    return chosenRecipe ? JSON.parse(chosenRecipe) : "";
+    return chosenRecipe ? JSON.parse(chosenRecipe) : null;
   };
   const [chosenRecipe, setChosenRecipe] = useState(getInitialChosenRecipeState);
 
   useEffect(() => {
-    sessionStorage.setItem("CHOSEN_RECIPE", JSON.stringify(chosenRecipe));
+    sessionStorage.setItem(
+      "CHOSEN_RECIPE",
+      JSON.stringify(chosenRecipe || null)
+    );
   }, [chosenRecipe]);
 
   //////////////////////////////////////

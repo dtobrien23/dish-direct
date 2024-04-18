@@ -11,7 +11,7 @@ const Home = () => {
 
   // reset states when going back to Home page
   useEffect(() => {
-    setChosenRecipe("");
+    setChosenRecipe(null);
   }, [location]);
 
   // lists of options on Home page

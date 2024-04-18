@@ -9,7 +9,7 @@ const RecipeInfo = () => {
     <div className="page-container">
       <Navbar />
       <div>
-        {chosenRecipe.image ? (
+        {chosenRecipe ? (
           <>
             <div
               style={{
