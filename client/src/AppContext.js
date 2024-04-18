@@ -8,19 +8,37 @@ export const AppProvider = ({ children }) => {
   const [numOfRecipes, setNumOfRecipes] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [recipesToShow, setRecipesToShow] = useState(30);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const getInitialState = () => {
+  ///////////////////////////
+  // HANDLING LOG IN STATE //
+  ///////////////////////////
+  const getInitialLoginState = () => {
+    const loggedIn = sessionStorage.getItem("LOGGED_IN");
+    return loggedIn === "true";
+  };
+  const [isLoggedIn, setIsLoggedIn] = useState(getInitialLoginState);
+
+  useEffect(() => {
+    sessionStorage.setItem("LOGGED_IN", JSON.stringify(isLoggedIn));
+    console.log(isLoggedIn);
+  }, [isLoggedIn]);
+
+  //////////////////////////////////
+  // HANDLING CHOSEN RECIPE STATE //
+  //////////////////////////////////
+  const getInitialChosenRecipeState = () => {
     const chosenRecipe = sessionStorage.getItem("CHOSEN_RECIPE");
     return chosenRecipe ? JSON.parse(chosenRecipe) : "";
   };
+  const [chosenRecipe, setChosenRecipe] = useState(getInitialChosenRecipeState);
 
-  const [chosenRecipe, setChosenRecipe] = useState(getInitialState);
-
-  // keeping state persistent until user goes back to Home page
   useEffect(() => {
     sessionStorage.setItem("CHOSEN_RECIPE", JSON.stringify(chosenRecipe));
   }, [chosenRecipe]);
+
+  //////////////////////////////////////
+  // RECIPE SEARCH QUERY POST REQUEST //
+  //////////////////////////////////////
 
   // searchQuery as a parameter to bypass asynchronous state variable updates
   const handleSearch = (searchQuery, param = "query") => {
