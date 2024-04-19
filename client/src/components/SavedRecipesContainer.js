@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../AppContext";
-import SaveButton from "./SaveButton";
+import UnsaveButton from "./UnsaveButton";
 
 const SavedRecipeContainer = () => {
   const { recipeData, setChosenRecipe, savedRecipes } = useAppContext();
@@ -65,11 +65,7 @@ const SavedRecipeContainer = () => {
                 <h1 style={{ margin: 0 }}>{recipe.title}</h1>
               </Link>
 
-              <SaveButton
-                id={recipe.id}
-                title={recipe.title}
-                imgUrl={recipe.image}
-              />
+              <UnsaveButton recipeId={recipe.recipeId} />
             </div>
           </div>
         </div>

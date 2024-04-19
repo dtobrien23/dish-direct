@@ -2,9 +2,10 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import SaveButton from "../components/SaveButton";
 import { useAppContext } from "../AppContext";
+import UnsaveButton from "../components/UnsaveButton";
 
 const RecipeInfo = () => {
-  const { chosenRecipe } = useAppContext();
+  const { chosenRecipe, savedRecipes } = useAppContext();
 
   return (
     <div className="page-container">
@@ -37,7 +38,17 @@ const RecipeInfo = () => {
                   {chosenRecipe.vegetarian === true && <span>Vegetarian</span>}
                   {chosenRecipe.glutenFree === true && <span>Gluten-Free</span>}
                 </p>
-                <SaveButton />
+                {savedRecipes.find(
+                  (savedRecipe) => savedRecipe.recipeId === chosenRecipe.id
+                ) ? (
+                  <UnsaveButton recipeId={chosenRecipe.id} />
+                ) : (
+                  <SaveButton
+                    id={chosenRecipe.id}
+                    title={chosenRecipe.title}
+                    imgUrl={chosenRecipe.image}
+                  />
+                )}
               </div>
             </div>
 

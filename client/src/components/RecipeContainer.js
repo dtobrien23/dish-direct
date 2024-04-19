@@ -2,10 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../AppContext";
 import SaveButton from "./SaveButton";
+import UnsaveButton from "./UnsaveButton";
 
 const RecipeContainer = () => {
-  const { recipeData, recipesToShow, setRecipesToShow, setChosenRecipe } =
-    useAppContext();
+  const {
+    recipeData,
+    recipesToShow,
+    setRecipesToShow,
+    setChosenRecipe,
+    savedRecipes,
+  } = useAppContext();
 
   const handleLoadMore = () => {
     setRecipesToShow(recipesToShow + 30);
@@ -66,11 +72,17 @@ const RecipeContainer = () => {
                 {recipe.vegetarian === true && <span>Vegetarian</span>}
                 {recipe.glutenFree === true && <span>Gluten-Free</span>}
               </p>
-              <SaveButton
-                id={recipe.id}
-                title={recipe.title}
-                imgUrl={recipe.image}
-              />
+              {savedRecipes.find(
+                (savedRecipe) => savedRecipe.recipeId === recipe.id
+              ) ? (
+                <UnsaveButton recipeId={recipe.id} />
+              ) : (
+                <SaveButton
+                  id={recipe.id}
+                  title={recipe.title}
+                  imgUrl={recipe.image}
+                />
+              )}
             </div>
           </div>
         </div>

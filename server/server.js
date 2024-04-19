@@ -94,6 +94,32 @@ app.post("/save-recipe", jsonParser, async (req, res) => {
   }
 });
 
+///////////////////////////////////////
+// FOR USER TO DELETE A SAVED RECIPE //
+///////////////////////////////////////
+app.delete("/unsave-recipe", jsonParser, async (req, res) => {
+  try {
+    const { email, recipeId } = req.body;
+    const user = await User.findOne({ email });
+
+    const index = user.savedRecipes.findIndex(
+      (recipe) => recipe.recipeId === recipeId
+    );
+
+    // Remove the recipe from the savedRecipes array
+    if (index !== -1) {
+      user.savedRecipes.splice(index, 1);
+      await user.save();
+      res.status(200).json({ message: "Recipe deleted successfully" });
+    } else {
+      res.status(404).json({ error: "Recipe not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting recipe:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 ///////////////////////////////////////////////////
 // CARRY OUT RECIPE SEARCH WITH SPOONTACULAR API //
 ///////////////////////////////////////////////////
