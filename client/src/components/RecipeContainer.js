@@ -1,27 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../AppContext";
+import SaveButton from "./SaveButton";
 
 const RecipeContainer = () => {
-  const {
-    recipeData,
-    numOfRecipes,
-    recipesToShow,
-    setRecipesToShow,
-    setChosenRecipe,
-  } = useAppContext();
+  const { recipeData, recipesToShow, setRecipesToShow, setChosenRecipe } =
+    useAppContext();
 
   const handleLoadMore = () => {
     setRecipesToShow(recipesToShow + 30);
   };
 
   return (
-    <div style={{ margin: "40px 200px 80px 200px" }}>
-      <p>
-        Showing 1 to{" "}
-        {recipesToShow < numOfRecipes ? recipesToShow : numOfRecipes} of{" "}
-        {numOfRecipes} results
-      </p>
+    <>
       {recipeData.results.slice(0, recipesToShow).map((recipe, index) => (
         <div
           key={recipe.id}
@@ -75,6 +66,11 @@ const RecipeContainer = () => {
                 {recipe.vegetarian === true && <span>Vegetarian</span>}
                 {recipe.glutenFree === true && <span>Gluten-Free</span>}
               </p>
+              <SaveButton
+                id={recipe.id}
+                title={recipe.title}
+                imgUrl={recipe.image}
+              />
             </div>
           </div>
         </div>
@@ -82,7 +78,7 @@ const RecipeContainer = () => {
       {recipeData.results.length > recipesToShow && (
         <button onClick={handleLoadMore}>Load More</button>
       )}
-    </div>
+    </>
   );
 };
 

@@ -3,7 +3,7 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useAppContext } from "../AppContext";
 
 const GoogleAuth = () => {
-  const { setIsLoggedIn, setUserEmail } = useAppContext();
+  const { setIsLoggedIn, setUserEmail, setSavedRecipes } = useAppContext();
 
   const clientId = process.env.REACT_APP_CLIENT_ID;
 
@@ -28,6 +28,7 @@ const GoogleAuth = () => {
         setIsLoggedIn(true);
         console.log(data);
         setUserEmail(data.payload.email);
+        setSavedRecipes(data.savedRecipes);
       } else {
         console.error("Authentication failed:", res.statusText);
       }

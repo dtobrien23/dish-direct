@@ -13,6 +13,7 @@ const Navbar = () => {
     setIsLoggedIn,
     userEmail,
     setUserEmail,
+    setSavedRecipes,
   } = useAppContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState();
   const dropdownRef = useRef(null);
@@ -40,6 +41,7 @@ const Navbar = () => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUserEmail(null);
+    setSavedRecipes([]);
   };
 
   const handleAccountDeletion = async () => {

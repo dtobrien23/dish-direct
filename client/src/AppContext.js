@@ -8,7 +8,6 @@ export const AppProvider = ({ children }) => {
   const [numOfRecipes, setNumOfRecipes] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [recipesToShow, setRecipesToShow] = useState(30);
-  const [userEmail, setUserEmail] = useState(null);
 
   ///////////////////////////
   // HANDLING LOG IN STATE //
@@ -23,6 +22,34 @@ export const AppProvider = ({ children }) => {
     sessionStorage.setItem("LOGGED_IN", JSON.stringify(isLoggedIn));
     console.log(isLoggedIn);
   }, [isLoggedIn]);
+
+  ///////////////////////////////
+  // HANDLING USER EMAIL STATE //
+  ///////////////////////////////
+  const getInitialUserEmailState = () => {
+    const userEmail = sessionStorage.getItem("USER_EMAIL");
+    return userEmail ? JSON.parse(userEmail) : null;
+  };
+
+  const [userEmail, setUserEmail] = useState(getInitialUserEmailState);
+
+  useEffect(() => {
+    sessionStorage.setItem("USER_EMAIL", JSON.stringify(userEmail || null));
+  }, [userEmail]);
+
+  //////////////////////////////////
+  // HANDLING SAVED RECIPES STATE //
+  //////////////////////////////////
+  const getInitialSavedRecipesState = () => {
+    const savedRecipes = sessionStorage.getItem("SAVED_RECIPES");
+    return savedRecipes ? JSON.parse(savedRecipes) : [];
+  };
+
+  const [savedRecipes, setSavedRecipes] = useState(getInitialSavedRecipesState);
+
+  useEffect(() => {
+    sessionStorage.setItem("SAVED_RECIPES", JSON.stringify(savedRecipes || []));
+  }, [savedRecipes]);
 
   //////////////////////////////////
   // HANDLING CHOSEN RECIPE STATE //
@@ -83,6 +110,8 @@ export const AppProvider = ({ children }) => {
         setIsLoggedIn,
         userEmail,
         setUserEmail,
+        savedRecipes,
+        setSavedRecipes,
       }}
     >
       {children}

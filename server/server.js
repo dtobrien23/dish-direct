@@ -37,9 +37,11 @@ app.post("/google-auth", jsonParser, async (req, res) => {
     });
     const payload = ticket.getPayload();
     const { email, given_name, family_name } = payload;
+    console.log("here's the email:", email);
 
     // check if user exists in database
     let user = await User.findOne({ email });
+    console.log("user?", user);
     if (!user) {
       // create user if they do not exist
       user = await User.create({
@@ -49,9 +51,14 @@ app.post("/google-auth", jsonParser, async (req, res) => {
       });
     }
 
+    const savedRecipes = user.savedRecipes;
+
     // generate JWT token
-    const token = jwt.sign({ user }, JWT_SECRET);
-    res.status(200).cookie("token", token, { http: true }).json({ payload });
+    const token = jwt.sign({ user, savedRecipes }, JWT_SECRET);
+    res
+      .status(200)
+      .cookie("token", token, { http: true })
+      .json({ payload, savedRecipes });
   } catch (err) {
     res.status(400).json({ err });
   }
@@ -70,6 +77,22 @@ app.delete("/delete-user", jsonParser, async (req, res) => {
     res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     console.error("Error deleting user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+//////////////////////////////
+// FOR USER TO SAVE RECIPES //
+//////////////////////////////
+app.post("/save-recipe", jsonParser, async (req, res) => {
+  try {
+    const { email, recipeId, title, imgUrl } = req.body;
+    const user = await User.findOne({ email });
+    user.savedRecipes.push({ recipeId, title, imgUrl });
+    await user.save();
+    res.status(200).json({ message: "Recipe saved successfully" });
+  } catch (error) {
+    console.error("Error saving recipe:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });

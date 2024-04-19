@@ -19,6 +19,25 @@ const userSchema = mongoose.Schema({
     default: "self",
     type: String,
   },
+  savedRecipes: {
+    type: [
+      {
+        recipeId: {
+          type: Number,
+          required: true,
+        },
+        title: {
+          type: String,
+          required: true,
+        },
+        imgUrl: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    default: [], // Initialize savedRecipes as an empty array
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
