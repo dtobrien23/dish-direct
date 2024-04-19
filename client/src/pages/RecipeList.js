@@ -11,7 +11,7 @@ const RecipeList = () => {
       <Navbar />
       {typeof recipeData.totalResults === "undefined" ||
       recipeData.totalResults === 0 ? (
-        <p>Sorry! No recipe found</p>
+        <p>Sorry! No recipes found</p>
       ) : (
         <RecipeContainer />
       )}

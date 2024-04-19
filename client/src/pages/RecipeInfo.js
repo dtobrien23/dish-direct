@@ -72,7 +72,7 @@ const RecipeInfo = () => {
             </div>
           </>
         ) : (
-          <p>Hold on!!!</p>
+          <p>You haven't chosen a recipe!</p>
         )}
       </div>
     </div>

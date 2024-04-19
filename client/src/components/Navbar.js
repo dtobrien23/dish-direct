@@ -53,9 +53,17 @@ const Navbar = () => {
             color: "white",
           }}
         >
+          {isLoggedIn && (
+            <>
+              <Link to="/saved-recipes" style={{ textDecoration: "none" }}>
+                <button className="navbar-btn">Saved Recipes</button>
+              </Link>
+              <div style={{ margin: "0px 5px" }}>|</div>
+            </>
+          )}
           <div className="dropdown" ref={dropdownRef}>
-            <button className="dropbtn" onClick={toggleDropdown}>
-              {isLoggedIn ? "Account" : "Log In"}
+            <button className="navbar-btn" onClick={toggleDropdown}>
+              {isLoggedIn ? "My Account" : "Log In"}
             </button>
 
             {isDropdownOpen && (
