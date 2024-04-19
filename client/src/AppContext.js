@@ -8,6 +8,7 @@ export const AppProvider = ({ children }) => {
   const [numOfRecipes, setNumOfRecipes] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [recipesToShow, setRecipesToShow] = useState(30);
+  const [userEmail, setUserEmail] = useState(null);
 
   ///////////////////////////
   // HANDLING LOG IN STATE //
@@ -80,6 +81,8 @@ export const AppProvider = ({ children }) => {
         setChosenRecipe,
         isLoggedIn,
         setIsLoggedIn,
+        userEmail,
+        setUserEmail,
       }}
     >
       {children}

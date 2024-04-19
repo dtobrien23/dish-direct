@@ -11,16 +11,14 @@ const Navbar = () => {
     handleSearch,
     isLoggedIn,
     setIsLoggedIn,
+    userEmail,
+    setUserEmail,
   } = useAppContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState();
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
   };
 
   // Effect to add event listener when component mounts
@@ -38,6 +36,35 @@ const Navbar = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUserEmail(null);
+  };
+
+  const handleAccountDeletion = async () => {
+    try {
+      const res = await fetch("/delete-user", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userEmail,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        console.log("Account deleted:", data);
+        handleLogout();
+      } else {
+        console.error("Account deletion failed:", res.statusText);
+      }
+    } catch (error) {
+      console.error("Error during account deletion:", error);
+    }
+  };
 
   return (
     <>
@@ -69,7 +96,12 @@ const Navbar = () => {
             {isDropdownOpen && (
               <div className="dropdown-content">
                 {isLoggedIn ? (
-                  <button onClick={handleLogout}>Log Out</button>
+                  <>
+                    <button onClick={handleLogout}>Log Out</button>
+                    <button onClick={handleAccountDeletion}>
+                      Delete Account
+                    </button>
+                  </>
                 ) : (
                   <GoogleAuth />
                 )}

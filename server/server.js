@@ -57,6 +57,23 @@ app.post("/google-auth", jsonParser, async (req, res) => {
   }
 });
 
+////////////////////////////////
+// FOR USER TO DELETE ACCOUNT //
+////////////////////////////////
+app.delete("/delete-user", jsonParser, async (req, res) => {
+  console.log(req.body);
+  const email = req.body.email;
+
+  try {
+    // Delete the user from the database using the user ID
+    await User.findOneAndDelete({ email });
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 ///////////////////////////////////////////////////
 // CARRY OUT RECIPE SEARCH WITH SPOONTACULAR API //
 ///////////////////////////////////////////////////
