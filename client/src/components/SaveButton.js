@@ -3,44 +3,52 @@ import { useAppContext } from "../AppContext";
 
 const SaveButton = (props) => {
   const { id, title, imgUrl } = props;
-  const { userEmail, setSavedRecipes } = useAppContext();
+  const { isLoggedIn, userEmail, setSavedRecipes, toggleDropdown } =
+    useAppContext();
 
-  const handleSaveRecipe = async (id, title, imgUrl) => {
-    try {
-      const res = await fetch("/save-recipe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: userEmail,
-          recipeId: id,
-          title: title,
-          imgUrl: imgUrl,
-        }),
-      });
+  const handleSaveRecipe = async (id, title, imgUrl, e) => {
+    e.stopPropagation();
 
-      if (res.ok) {
-        const data = await res.json();
-        console.log(data);
-        setSavedRecipes((prevSavedRecipes) => {
-          return [
-            ...prevSavedRecipes,
-            { recipeId: id, title: title, imgUrl, imgUrl },
-          ];
+    if (isLoggedIn) {
+      try {
+        const res = await fetch("/save-recipe", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: userEmail,
+            recipeId: id,
+            title: title,
+            imgUrl: imgUrl,
+          }),
         });
-      } else {
-        console.error("Recipe save failed:", res.statusText);
+
+        if (res.ok) {
+          const data = await res.json();
+          console.log(data);
+          setSavedRecipes((prevSavedRecipes) => {
+            return [
+              ...prevSavedRecipes,
+              { recipeId: id, title: title, imgUrl, imgUrl },
+            ];
+          });
+        } else {
+          console.error("Recipe save failed:", res.statusText);
+        }
+      } catch (error) {
+        console.error("Error during recipe save:", error);
       }
-    } catch (error) {
-      console.error("Error during recipe save:", error);
+    } else {
+      console.log("not logged in");
+      toggleDropdown();
     }
   };
 
   return (
     <button
-      onClick={() => {
-        handleSaveRecipe(id, title, imgUrl);
+      onClick={(e) => {
+        handleSaveRecipe(id, title, imgUrl, e);
       }}
     >
       SAVE

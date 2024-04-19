@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import SaveButton from "../components/SaveButton";
 import { useAppContext } from "../AppContext";
 
 const RecipeInfo = () => {
@@ -36,6 +37,7 @@ const RecipeInfo = () => {
                   {chosenRecipe.vegetarian === true && <span>Vegetarian</span>}
                   {chosenRecipe.glutenFree === true && <span>Gluten-Free</span>}
                 </p>
+                <SaveButton />
               </div>
             </div>
 

@@ -14,29 +14,10 @@ const Navbar = () => {
     userEmail,
     setUserEmail,
     setSavedRecipes,
+    toggleDropdown,
+    dropdownRef,
+    isDropdownOpen,
   } = useAppContext();
-  const [isDropdownOpen, setIsDropdownOpen] = useState();
-  const dropdownRef = useRef(null);
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  // Effect to add event listener when component mounts
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    // Cleanup function to remove event listener when component unmounts
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
 
   const handleLogout = () => {
     setIsLoggedIn(false);

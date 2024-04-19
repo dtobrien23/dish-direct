@@ -1,4 +1,10 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 
 export const AppContext = createContext();
 export const useAppContext = () => useContext(AppContext);
@@ -8,6 +14,28 @@ export const AppProvider = ({ children }) => {
   const [numOfRecipes, setNumOfRecipes] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [recipesToShow, setRecipesToShow] = useState(30);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // Effect to add event listener when component mounts
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   ///////////////////////////
   // HANDLING LOG IN STATE //
@@ -112,6 +140,10 @@ export const AppProvider = ({ children }) => {
         setUserEmail,
         savedRecipes,
         setSavedRecipes,
+        toggleDropdown,
+        dropdownRef,
+        isDropdownOpen,
+        setIsDropdownOpen,
       }}
     >
       {children}
