@@ -37,11 +37,9 @@ app.post("/google-auth", jsonParser, async (req, res) => {
     });
     const payload = ticket.getPayload();
     const { email, given_name, family_name } = payload;
-    console.log("here's the email:", email);
 
     // check if user exists in database
     let user = await User.findOne({ email });
-    console.log("user?", user);
     if (!user) {
       // create user if they do not exist
       user = await User.create({
@@ -68,7 +66,6 @@ app.post("/google-auth", jsonParser, async (req, res) => {
 // FOR USER TO DELETE ACCOUNT //
 ////////////////////////////////
 app.delete("/delete-user", jsonParser, async (req, res) => {
-  console.log(req.body);
   const email = req.body.email;
 
   try {
@@ -113,6 +110,29 @@ app.post("/search", jsonParser, async (req, res) => {
         addRecipeNutrition: true,
         fillIngredients: true,
         number: 100,
+      },
+    });
+    const data = response.data;
+
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching recipes:", error);
+    res.status(500).json({ error: "An error occurred while fetching recipes" });
+  }
+});
+
+////////////////////////////////////
+// SEARCH BY ID VIA SAVED RECIPES //
+////////////////////////////////////
+app.post("/search-by-id", jsonParser, async (req, res) => {
+  try {
+    const id = req.body.id;
+    console.log(id);
+    const spoonIdURL = `https://api.spoonacular.com/recipes/${id}/information`;
+    const response = await axios.get(spoonIdURL, {
+      params: {
+        apiKey: spoonApiKey,
+        includeNutrition: true,
       },
     });
     const data = response.data;

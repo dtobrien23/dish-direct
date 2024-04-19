@@ -6,11 +6,27 @@ import SaveButton from "./SaveButton";
 const SavedRecipeContainer = () => {
   const { recipeData, setChosenRecipe, savedRecipes } = useAppContext();
 
+  const handleSavedRecipeSelection = (id) => {
+    console.log(id);
+    fetch("/search-by-id", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setChosenRecipe(data);
+        console.log(data);
+      });
+  };
+
   return (
     <>
       {savedRecipes.map((recipe, index) => (
         <div
-          key={recipe.id}
+          key={recipe.recipeId}
           style={{
             borderBottom:
               index !== savedRecipes.length - 1 ? "1px solid black" : "none",
@@ -22,7 +38,7 @@ const SavedRecipeContainer = () => {
             <Link
               to="/recipe-info"
               onClick={() => {
-                setChosenRecipe(recipe);
+                handleSavedRecipeSelection(recipe.recipeId); // leads to error - need to make a new Spoonacular API call with recipe ID
               }}
               style={{ textDecoration: "none" }}
             >
@@ -36,7 +52,7 @@ const SavedRecipeContainer = () => {
               <Link
                 to="/recipe-info"
                 onClick={() => {
-                  setChosenRecipe(recipe);
+                  handleSavedRecipeSelection(recipe.recipeId); // leads to error - need to make a new Spoonacular API call with recipe ID
                 }}
                 style={{ textDecoration: "none", color: "black" }}
                 onMouseEnter={(e) => {
