@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import SaveButton from "../components/SaveButton";
 import { useAppContext } from "../AppContext";
 import UnsaveButton from "../components/UnsaveButton";
+import { useLocation } from "react-router-dom";
 
 const RecipeInfo = () => {
-  const { chosenRecipe, savedRecipes } = useAppContext();
+  const { chosenRecipe, savedRecipes, setSearchQuery } = useAppContext();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setSearchQuery("");
+  }, [location]);
 
   return (
     <div className="page-container">

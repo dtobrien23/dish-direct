@@ -5,13 +5,14 @@ import HomePageLink from "../components/HomePageLink";
 import { useAppContext } from "../AppContext";
 
 const Home = () => {
-  const { setChosenRecipe } = useAppContext();
+  const { setChosenRecipe, setSearchQuery } = useAppContext();
 
   const location = useLocation();
 
   // reset states when going back to Home page
   useEffect(() => {
     setChosenRecipe(null);
+    setSearchQuery("");
   }, [location]);
 
   // lists of options on Home page
