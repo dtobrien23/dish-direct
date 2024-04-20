@@ -50,6 +50,13 @@ const SaveButton = (props) => {
       onClick={(e) => {
         handleSaveRecipe(id, title, imgUrl, e);
       }}
+      style={{
+        padding: "3px 5px",
+        backgroundColor: "#F1B723",
+        cursor: "pointer",
+        border: "1px solid black",
+        fontWeight: "bold",
+      }}
     >
       SAVE
     </button>

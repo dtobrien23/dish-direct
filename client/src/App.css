@@ -13,6 +13,7 @@ h2 {
 
 .page-container {
   height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
 }
@@ -23,7 +24,7 @@ h2 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 0px 200px;
+  margin: 0px 250px;
 }
 
 #options-list-container {
@@ -41,22 +42,31 @@ h2 {
   background-color: #940000;
   color: white;
   font-size: 16px;
+  /* font-weight: bold; */
   border: none;
   cursor: pointer;
 }
 
-/* The container <div> - needed to position the dropdown content */
+.navbar-btn:hover {
+  text-decoration: underline;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: block;
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
+  padding: 10px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  text-align: left;
+}
+
+.dropdown-content button:hover {
+  text-decoration: underline;
 }

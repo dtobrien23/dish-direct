@@ -4,7 +4,7 @@ import { useAppContext } from "../AppContext";
 import UnsaveButton from "./UnsaveButton";
 
 const SavedRecipeContainer = () => {
-  const { recipeData, setChosenRecipe, savedRecipes } = useAppContext();
+  const { setChosenRecipe, savedRecipes } = useAppContext();
 
   const handleSavedRecipeSelection = (id) => {
     console.log(id);
@@ -23,18 +23,33 @@ const SavedRecipeContainer = () => {
   };
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        margin: "40px 250px 80px 250px",
+        justifyContent: "space-between",
+      }}
+    >
       {savedRecipes.map((recipe, index) => (
         <div
           key={recipe.recipeId}
           style={{
-            borderBottom:
-              index !== savedRecipes.length - 1 ? "1px solid black" : "none",
+            height: "300px",
+            width: "250px",
+            marginBottom: "30px",
+            border: "1px solid black",
             padding: "20px",
             backgroundColor: "white",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "row" }}>
+          <div
+            style={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             <Link
               to="/recipe-info"
               onClick={() => {
@@ -45,10 +60,17 @@ const SavedRecipeContainer = () => {
               <img
                 src={recipe.imgUrl}
                 alt="Lovely food"
-                style={{ height: "120px" }}
+                style={{ width: "100%", marginBottom: "10px" }}
               />
             </Link>
-            <div style={{ margin: "10px 0px 0px 20px" }}>
+            <div
+              style={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
               <Link
                 to="/recipe-info"
                 onClick={() => {
@@ -62,7 +84,7 @@ const SavedRecipeContainer = () => {
                   e.target.style.color = "black";
                 }}
               >
-                <h1 style={{ margin: 0 }}>{recipe.title}</h1>
+                <h3 style={{ margin: 0 }}>{recipe.title}</h3>
               </Link>
 
               <UnsaveButton recipeId={recipe.recipeId} />
@@ -70,7 +92,7 @@ const SavedRecipeContainer = () => {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

@@ -37,6 +37,14 @@ const UnsaveButton = (props) => {
       onClick={() => {
         handleUnsaveRecipe(recipeId);
       }}
+      style={{
+        padding: "3px 5px",
+        color: "white",
+        backgroundColor: "#940000",
+        cursor: "pointer",
+        border: "1px solid black",
+        fontWeight: "bold",
+      }}
     >
       UNSAVE
     </button>

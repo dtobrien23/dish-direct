@@ -51,13 +51,13 @@ const Navbar = () => {
 
   return (
     <>
-      <div style={{ height: "30px", backgroundColor: "#940000" }}>
+      <div style={{ minHeight: "30px", backgroundColor: "#940000" }}>
         <div
           style={{
-            height: "100%",
+            minHeight: "100%",
             display: "flex",
             flexDirection: "row",
-            margin: "0px 200px",
+            margin: "0px 250px",
             alignItems: "center",
             justifyContent: "flex-end",
             color: "white",
@@ -80,13 +80,43 @@ const Navbar = () => {
               <div className="dropdown-content">
                 {isLoggedIn ? (
                   <>
-                    <button onClick={handleLogout}>Log Out</button>
-                    <button onClick={handleAccountDeletion}>
+                    <button
+                      onClick={handleLogout}
+                      style={{
+                        fontSize: "16px",
+                        color: "black",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Log Out
+                    </button>
+                    <button
+                      onClick={handleAccountDeletion}
+                      style={{
+                        marginTop: "5px",
+                        fontSize: "16px",
+                        color: "red",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                    >
                       Delete Account
                     </button>
                   </>
                 ) : (
-                  <GoogleAuth />
+                  <>
+                    <p
+                      style={{
+                        width: "208px", // to prevent resizing after sign in with Google finds linked account
+                        color: "black",
+                        margin: "0px 0px 10px 0px",
+                      }}
+                    >
+                      Sign in with Google to save recipes for later!
+                    </p>
+                    <GoogleAuth />
+                  </>
                 )}
               </div>
             )}
@@ -104,7 +134,7 @@ const Navbar = () => {
         <div
           style={{
             height: "100%",
-            margin: "0px 200px",
+            margin: "0px 250px",
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
@@ -116,7 +146,7 @@ const Navbar = () => {
               <img
                 src="../../images/dish-direct.png"
                 alt="Logo"
-                style={{ height: "45px" }}
+                style={{ height: "45px", marginRight: "48px" }}
               />
             </Link>
           </div>
@@ -160,6 +190,7 @@ const Navbar = () => {
                   border: "none",
                   boxSizing: "border-box",
                   cursor: "pointer",
+                  fontWeight: "bold",
                 }}
               >
                 Search

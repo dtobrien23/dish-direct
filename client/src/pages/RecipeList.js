@@ -13,7 +13,7 @@ const RecipeList = () => {
       recipeData.totalResults === 0 ? (
         <p>Sorry! No recipes found</p>
       ) : (
-        <div style={{ margin: "40px 200px 80px 200px" }}>
+        <div style={{ margin: "40px 250px 80px 250px" }}>
           <p>
             Showing 1 to{" "}
             {recipesToShow < numOfRecipes ? recipesToShow : numOfRecipes} of{" "}
