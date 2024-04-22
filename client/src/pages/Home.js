@@ -77,7 +77,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="page-container">
+    <div id="homepage-container">
       <Navbar />
       <div id="homepage-content-container">
         <div id="options-list-container">
