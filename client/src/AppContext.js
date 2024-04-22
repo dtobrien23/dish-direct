@@ -15,6 +15,7 @@ export const AppProvider = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [recipesToShow, setRecipesToShow] = useState(30);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [areRecipesLoading, setAreRecipesLoading] = useState(false);
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
@@ -101,6 +102,8 @@ export const AppProvider = ({ children }) => {
 
   // searchQuery as a parameter to bypass asynchronous state variable updates
   const handleSearch = (searchQuery, param = "query") => {
+    setRecipeData([{}]);
+    setAreRecipesLoading(true);
     fetch("/search", {
       method: "POST",
       headers: {
@@ -118,6 +121,7 @@ export const AppProvider = ({ children }) => {
             : setNumOfRecipes(data.number);
         }
         setRecipesToShow(30); // to reset after each new search
+        setAreRecipesLoading(false);
       });
   };
 
@@ -144,6 +148,7 @@ export const AppProvider = ({ children }) => {
         dropdownRef,
         isDropdownOpen,
         setIsDropdownOpen,
+        areRecipesLoading,
       }}
     >
       {children}

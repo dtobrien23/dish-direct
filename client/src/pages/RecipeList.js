@@ -5,8 +5,13 @@ import RecipeContainer from "../components/RecipeContainer";
 import "../App.css";
 
 const RecipeList = () => {
-  const { searchQuery, recipeData, recipesToShow, numOfRecipes } =
-    useAppContext();
+  const {
+    searchQuery,
+    areRecipesLoading,
+    recipeData,
+    recipesToShow,
+    numOfRecipes,
+  } = useAppContext();
   return (
     <div className="page-container">
       <Navbar />
@@ -20,8 +25,9 @@ const RecipeList = () => {
           }}
         >
           <p style={{ fontWeight: "bold", fontSize: "24px" }}>
-            Sorry! No results found for '{searchQuery}'. Please update your
-            search term.
+            {areRecipesLoading === true
+              ? "Fetching recipes..."
+              : `Sorry! No results found for '${searchQuery}'. Please update your search term.`}
           </p>
         </div>
       ) : (
