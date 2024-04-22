@@ -1,5 +1,6 @@
 body {
   background-color: #f0f0f0;
+  overflow-x: hidden;
 }
 
 span {
@@ -42,7 +43,6 @@ h2 {
   background-color: #940000;
   color: white;
   font-size: 16px;
-  /* font-weight: bold; */
   border: none;
   cursor: pointer;
 }
