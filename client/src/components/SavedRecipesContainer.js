@@ -27,11 +27,10 @@ const SavedRecipeContainer = () => {
       style={{
         display: "flex",
         flexWrap: "wrap",
-        margin: "40px 250px 80px 250px",
         justifyContent: "space-between",
       }}
     >
-      {savedRecipes.map((recipe, index) => (
+      {savedRecipes.map((recipe) => (
         <div
           key={recipe.recipeId}
           style={{

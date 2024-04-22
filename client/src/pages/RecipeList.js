@@ -5,13 +5,25 @@ import RecipeContainer from "../components/RecipeContainer";
 import "../App.css";
 
 const RecipeList = () => {
-  const { recipeData, recipesToShow, numOfRecipes } = useAppContext();
+  const { searchQuery, recipeData, recipesToShow, numOfRecipes } =
+    useAppContext();
   return (
     <div className="page-container">
       <Navbar />
       {typeof recipeData.totalResults === "undefined" ||
       recipeData.totalResults === 0 ? (
-        <p>Sorry! No recipes found</p>
+        <div
+          style={{
+            margin: "40px 250px 80px 250px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <p style={{ fontWeight: "bold", fontSize: "24px" }}>
+            Sorry! No results found for '{searchQuery}'. Please update your
+            search term.
+          </p>
+        </div>
       ) : (
         <div style={{ margin: "40px 250px 80px 250px" }}>
           <p>
