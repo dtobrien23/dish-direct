@@ -32,7 +32,7 @@ const RecipeList = () => {
         </div>
       ) : (
         <div style={{ margin: "40px 250px 80px 250px" }}>
-          <p>
+          <p style={{ marginTop: "0px" }}>
             Showing 1 to{" "}
             {recipesToShow < numOfRecipes ? recipesToShow : numOfRecipes} of{" "}
             {numOfRecipes} results

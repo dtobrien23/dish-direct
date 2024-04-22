@@ -26,6 +26,7 @@ const SavedRecipeContainer = () => {
   return (
     <div
       style={{
+        height: "100%",
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
         gap: "30px",
@@ -37,7 +38,6 @@ const SavedRecipeContainer = () => {
           style={{
             height: "300px",
             width: "250px",
-            marginBottom: "10px",
             border: "1px solid black",
             padding: "20px",
             backgroundColor: "white",

@@ -18,15 +18,13 @@ const RecipeContainer = () => {
   };
 
   return (
-    <>
+    <div style={{ height: "100%" }}>
       {recipeData.results.slice(0, recipesToShow).map((recipe, index) => (
         <div
           key={recipe.id}
           style={{
-            borderBottom:
-              index !== recipeData.results.length - 1
-                ? "1px solid black"
-                : "none",
+            marginBottom: "20px",
+            border: "1px solid black",
             padding: "20px",
             backgroundColor: "white",
           }}
@@ -88,9 +86,21 @@ const RecipeContainer = () => {
         </div>
       ))}
       {recipeData.results.length > recipesToShow && (
-        <button onClick={handleLoadMore}>Load More</button>
+        <button
+          onClick={handleLoadMore}
+          style={{
+            marginTop: "30px",
+            padding: "3px 5px",
+            backgroundColor: "#F1B723",
+            cursor: "pointer",
+            border: "1px solid black",
+            fontWeight: "bold",
+          }}
+        >
+          Load More
+        </button>
       )}
-    </>
+    </div>
   );
 };
 
