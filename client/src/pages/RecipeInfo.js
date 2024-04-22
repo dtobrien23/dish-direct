@@ -24,7 +24,7 @@ const RecipeInfo = () => {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                margin: "40px 200px",
+                margin: "40px 250px",
               }}
             >
               <img
@@ -63,7 +63,7 @@ const RecipeInfo = () => {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                padding: "30px 200px",
+                padding: "30px 250px",
                 backgroundColor: "white",
                 borderTop: "1px solid black",
               }}
@@ -92,7 +92,17 @@ const RecipeInfo = () => {
             </div>
           </>
         ) : (
-          <p>You haven't chosen a recipe!</p>
+          <div
+            style={{
+              margin: "40px 250px 80px 250px",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <p style={{ fontWeight: "bold", fontSize: "24px" }}>
+              Awaiting chosen recipe...
+            </p>
+          </div>
         )}
       </div>
     </div>

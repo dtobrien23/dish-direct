@@ -4,10 +4,11 @@ import { useAppContext } from "../AppContext";
 import UnsaveButton from "./UnsaveButton";
 
 const SavedRecipeContainer = () => {
-  const { setChosenRecipe, savedRecipes } = useAppContext();
+  const { setChosenRecipe, savedRecipes, setFetchingChosenRecipe } =
+    useAppContext();
 
   const handleSavedRecipeSelection = (id) => {
-    console.log(id);
+    setChosenRecipe(null);
     fetch("/search-by-id", {
       method: "POST",
       headers: {
@@ -73,7 +74,7 @@ const SavedRecipeContainer = () => {
               <Link
                 to="/recipe-info"
                 onClick={() => {
-                  handleSavedRecipeSelection(recipe.recipeId); // leads to error - need to make a new Spoonacular API call with recipe ID
+                  handleSavedRecipeSelection(recipe.recipeId);
                 }}
                 style={{ textDecoration: "none", color: "black" }}
                 onMouseEnter={(e) => {
