@@ -27,7 +27,7 @@ const RecipeList = () => {
           <p style={{ fontWeight: "bold", fontSize: "24px" }}>
             {areRecipesLoading === true
               ? "Fetching recipes..."
-              : `Sorry! No results found for '${searchQuery}'. Please update your search term.`}
+              : `Sorry! No results found. Please update your search term.`}
           </p>
         </div>
       ) : (
