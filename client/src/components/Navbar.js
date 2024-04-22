@@ -51,21 +51,15 @@ const Navbar = () => {
 
   return (
     <>
-      <div
-        style={{
-          minHeight: "30px",
-          backgroundColor: "#940000",
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-        }}
-      >
+      <div style={{ minHeight: "30px", backgroundColor: "#940000" }}>
         <div
           style={{
             minHeight: "100%",
             display: "flex",
             flexDirection: "row",
             margin: "0px 250px",
+            alignItems: "center",
+            justifyContent: "flex-end",
             color: "white",
           }}
         >
@@ -135,14 +129,11 @@ const Navbar = () => {
           width: "100%",
           backgroundColor: "white",
           borderBottom: "1px solid black",
-          display: "flex",
-          alignItems: "center",
         }}
       >
         <div
           style={{
             height: "100%",
-            width: "100%",
             margin: "0px 250px",
             display: "flex",
             flexDirection: "row",
