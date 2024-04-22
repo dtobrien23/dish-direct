@@ -30,7 +30,7 @@ const SavedRecipes = () => {
             }}
           >
             <p style={{ fontWeight: "bold", fontSize: "24px" }}>
-              Log in to view saved recipes.
+              Sign in to view saved recipes.
             </p>
           </div>
         ) : (
