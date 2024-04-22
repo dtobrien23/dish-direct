@@ -26,9 +26,9 @@ const SavedRecipeContainer = () => {
   return (
     <div
       style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+        gap: "30px",
       }}
     >
       {savedRecipes.map((recipe) => (
@@ -37,7 +37,7 @@ const SavedRecipeContainer = () => {
           style={{
             height: "300px",
             width: "250px",
-            marginBottom: "30px",
+            marginBottom: "10px",
             border: "1px solid black",
             padding: "20px",
             backgroundColor: "white",
