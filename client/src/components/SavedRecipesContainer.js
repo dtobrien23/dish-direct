@@ -29,7 +29,8 @@ const SavedRecipeContainer = () => {
         height: "100%",
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-        gap: "30px",
+        columnGap: "30px",
+        marginBottom: "60px",
       }}
     >
       {savedRecipes.map((recipe) => (
