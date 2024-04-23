@@ -1,0 +1,6 @@
+runtime: nodejs
+env: flex
+env_variables:
+  SPOON_API_KEY: "66d0734b27064d7c94a405dcf730e02b"
+  MONGO_URI: "mongodb+srv://dtobrien23:QJdqPC73nhju18Xp@dish-direct.ftxhybx.mongodb.net/?retryWrites=true&w=majority&appName=Dish-Direct"
+  JWT_SECRET: "jCuSCLCy30Lpw1zEtU6yiECUGLNJ0fN1"
